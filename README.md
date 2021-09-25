@@ -1,5 +1,5 @@
 # Advanced Load Balancing with Traefik 2.5
-## traefik-workshop-2
+## Traefik Workshop 2
 
 Agenda:
 
