@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+    name: whoami-wrr
+    namespace: app
+spec:
+  entryPoints:
+     - websecure
+  routes:
+     - kind: Rule
+       match: Host(`v.waw.demo.traefiklabs.tech`)
+       services:
+           - kind: TraefikService
+             name: weighted-whoami
+             namespace: app
+  tls:
+    certResolver: le           

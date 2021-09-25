@@ -1,0 +1,13 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: let-me-in
+  namespace: app
+spec:
+  headers:
+    customRequestHeaders:
+      X-Canary-Header: "knock-knock"
+    customResponseHeaders:
+      X-Canary-Response-Header: "hello there"

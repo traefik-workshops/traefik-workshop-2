@@ -1,0 +1,20 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: weighted-whoami
+  namespace: app
+spec:
+  weighted:
+    services:
+      - name: whoamiv1
+        port: 80
+        namespace: app
+        weight: 3
+
+      - name: whoamiv2
+        port: 80
+        weight: 1
+        namespace: app
+        

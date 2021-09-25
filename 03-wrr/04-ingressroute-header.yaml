@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+    name: whoami-wrr-header
+    namespace: app
+spec:
+  entryPoints:
+     - websecure
+  routes:
+    - kind: Rule
+      match: Host(`v.waw.demo.traefiklabs.tech`) && HeadersRegexp(`X-Canary-Header`, `knock-knock`)
+      services:
+        - kind: Service # is it better to use TraefikService?
+          name: whoamiv2
+          namespace: app
+          port: 80
+      middlewares:
+        - name: app-let-me-in@kubernetescrd
+  tls:
+    certResolver: le           
