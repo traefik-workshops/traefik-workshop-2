@@ -1,0 +1,30 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: whoami-sticky-session
+spec:
+  weighted:
+    sticky:
+      cookie:
+        name: lvl1
+    services:
+      - name: whoamiv1
+        port: 80
+        weight: 10
+        sticky:
+          cookie:
+            httpOnly: false
+            name: lvl2
+            secure: true
+            sameSite: strict
+      - name: whoamiv2
+        port: 80
+        weight: 1
+        sticky:
+          cookie:
+            httpOnly: false
+            name: lvl2
+            secure: true
+            sameSite: strict   
