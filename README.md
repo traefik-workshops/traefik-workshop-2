@@ -1,5 +1,5 @@
-# traefik-workshop-2
-Advanced Load Balancing with Traefik 2.5
+# Advanced Load Balancing with Traefik 2.5
+## traefik-workshop-2
 
 Agenda:
 
@@ -47,13 +47,11 @@ helm upgrade --install traefik -f values.yaml traefik/traefik -n traefik
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ```
 
-
 ## Deploying sample applications
 
 * Create a namepsace where apps and services will be created
 * Deploy the applications 
 * Create Ingressroute for deployed applications
-
 
 ## Weigthed Round Robin - Canary Deployment with Traefik
 
@@ -66,9 +64,53 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 ```sh
 curl https://v.waw.demo.traefiklabs.tech -H "X-Canary-Header: knock-knock"
 ```
-
 ## Mirroring
 
 * Deploy Traefik Service that introduces mirroring
-* Create Ingressroute hat use the created TraefikService
+* Create Ingressroute that use the created TraefikService
 * Verify your configuration, see the logs
+
+## Sticky Session
+
+* Deploy Traefik service with Sticky Session configuration
+* Deploy Ingressroute that points to the sticky session Traefik Service
+* Test your configuration using `curl -vv` or examine the cookies using Developer Tools.
+
+## Nested Healtchecks
+
+The feature is currently only available as dynamic configuration provided through File. That's why we have to add file provider that points to a config map containing Traefik's extra configuration
+
+* Create configmap:
+
+```sh
+ kubectl create configmap traefik-configs -n traefik --from-file=dynamic.yaml=config/dynamic.yaml 
+```
+
+* Add File provider and VolumeMounts to the `values.yaml`
+* Deploy Traefik using the files `values.yaml`
+```sh
+helm upgrade --install traefik -f values.yaml traefik/traefik -n traefik
+```
+* Verify running configuration using the following command:
+
+```sh
+curl https://nested.waw.demo.traefiklabs.tech
+```
+
+You should receive responses from both services whoamiv1 and whoamiv2 according to the weighets set in the dynamic configuration. 
+
+* Scale down to 0 replicas on one of the service
+ 
+```sh
+kubectl scale deployment whoamiv2 --replicas=0
+```
+
+* Verify configuration using the following command:
+
+```sh
+curl https://nested.waw.demo.traefiklabs.tech
+```
+
+You should receive reposnes only from `whoamiv1`.
+
+Traefik automatically discover that `whoamiv2` is down and send reuqests only to the healthy services, that is `whoamiv1`.

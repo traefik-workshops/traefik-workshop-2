@@ -1,0 +1,46 @@
+apiVersion: v1
+data:
+  dynamic.yaml: |
+    http:
+      services:
+        whoami-public:
+          weighted:
+            healthcheck: {}
+            services:
+            - name: whoami-dc1
+              weight: 3
+            - name: whoami-dc2
+              weight: 1
+
+        whoami-dc1:
+          loadBalancer:
+            servers:
+              - url: "http://whoamiv1.app.svc.cluster.local:80"
+            healthCheck:
+              scheme: http
+              interval: 2s
+              timeout: 1s
+              path: /ping
+
+        whoami-dc2:
+          loadBalancer:
+            servers:
+              - url: "http://whoamiv2.app.svc.cluster.local:80"
+            healthCheck:
+              scheme: http
+              interval: 2s
+              timeout: 1s
+              path: /ping
+
+      routers:
+        whoami-router:
+          entryPoints:
+            - websecure
+          rule: Host(`nested.waw.demo.traefiklabs.tech`)
+          service: whoami-public
+          tls:
+            certResolver: le
+kind: ConfigMap
+metadata:
+  name: traefik-configs
+  namespace: traefik
