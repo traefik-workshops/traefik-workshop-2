@@ -1,0 +1,18 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: mirror-whoami
+  namespace: app
+spec:
+  mirroring:
+    name: whoamiv1
+    port: 80
+    namespace: app
+    mirrors:
+
+      - name: whoamiv2 # logs
+        port: 80
+        namespace: app
+        percent: 50
