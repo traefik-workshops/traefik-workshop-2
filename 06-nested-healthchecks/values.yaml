@@ -15,10 +15,14 @@ additionalArguments:
   - "--certificatesresolvers.le.acme.tlschallenge=true"
   - "--certificatesresolvers.le.acme.email=jakub.hajek@traefik.io"
   - "--certificatesresolvers.le.acme.storage=/data/acme.json"
-  -  "--providers.file.filename=/config/dynamic.yaml" 
+  - "--providers.file.filename=/config/dynamic.yaml" 
 
 peristence:
-  enabled: true  
+  enabled: true
+  name: data
+  accessMode: ReadWriteOnce
+  size: 128Mi
+  path: /data
 
 logs: 
   access: 

@@ -17,7 +17,11 @@ additionalArguments:
   - "--certificatesresolvers.le.acme.storage=/data/acme.json"    
 
 peristence:
-  enabled: true  
+  enabled: true
+  name: data
+  accessMode: ReadWriteOnce
+  size: 128Mi
+  path: /data
 
 logs: 
   access: 
