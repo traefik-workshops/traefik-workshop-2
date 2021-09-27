@@ -1,4 +1,4 @@
-image: 
+image:
   name: traefik
   tag: "2.5.3"
 
@@ -14,15 +14,15 @@ additionalArguments:
   - "--certificatesresolvers.le-staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
   - "--certificatesresolvers.le.acme.tlschallenge=true"
   - "--certificatesresolvers.le.acme.email=jakub.hajek@traefik.io"
-  - "--certificatesresolvers.le.acme.storage=/data/acme.json"    
+  - "--certificatesresolvers.le.acme.storage=/data/acme.json"
 
-peristence:
+persistence:
   enabled: true
   name: data
   accessMode: ReadWriteOnce
   size: 128Mi
   path: /data
 
-logs: 
-  access: 
+logs:
+  access:
     enabled: true

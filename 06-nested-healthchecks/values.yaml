@@ -1,4 +1,4 @@
-image: 
+image:
   name: traefik
   tag: "2.5.3"
 
@@ -15,20 +15,20 @@ additionalArguments:
   - "--certificatesresolvers.le.acme.tlschallenge=true"
   - "--certificatesresolvers.le.acme.email=jakub.hajek@traefik.io"
   - "--certificatesresolvers.le.acme.storage=/data/acme.json"
-  - "--providers.file.filename=/config/dynamic.yaml" 
+  - "--providers.file.filename=/config/dynamic.yaml"
 
-peristence:
+persistence:
   enabled: true
   name: data
   accessMode: ReadWriteOnce
   size: 128Mi
   path: /data
 
-logs: 
-  access: 
+logs:
+  access:
     enabled: true
 
-volumes: 
+volumes:
   - name: '{{ printf "%s-configs" .Release.Name }}'
     mountPath: "/config"
     type: configMap
