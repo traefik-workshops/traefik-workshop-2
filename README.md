@@ -3,11 +3,11 @@
 
 Agenda:
 
-1. Deploying Traefik using the official Helm Chart
+1. Deploying Traefik using the official Helm Chart.
 2. Deploying sample applications and exposing them using IngressRoute.
 3. Weighted Round Robin using Traefik Service and headers.
 4. Mirroring.
-5. Load balancing with sticky session
+5. Load balancing with sticky session.
 6. Nested healthchecks with file provider. 
 
 
@@ -53,16 +53,15 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 * Deploy the applications 
 * Create Ingressroute for deployed applications
 
-## Weigthed Round Robin - Canary Deployment with Traefik
+## Weigthed Round Robin - Progressive *Canary* Deployment with Traefik
 
 * Deploy TraefikService and set the weights for each of the service
-* Deploy Ingressroute that use TraefikService, see the response comes from different services based on defined weights in the TraeikService
-* 
-* Deploy custom header 
+* Deploy Ingressroute that use TraefikService, see the response comes from different services based on defined weights in the TraefikService
+* Deploy Middleware with custom header 
 * Deploy Ingressroue with enhanced matching rule by Custom HTTP Header
 * Validate the deployment by sending HTTP request with added extra HTTP header
 ```sh
-curl https://v.waw.demo.traefiklabs.tech -H "X-Canary-Header: knock-knock"
+curl https://v.<fix-me>.demo.traefiklabs.tech -H "X-Canary-Header: knock-knock"
 ```
 ## Mirroring
 
@@ -76,9 +75,9 @@ curl https://v.waw.demo.traefiklabs.tech -H "X-Canary-Header: knock-knock"
 * Deploy Ingressroute that points to the sticky session Traefik Service
 * Test your configuration using `curl -vv` or examine the cookies using Developer Tools.
 
-## Nested Healtchecks
+## Nested Healthchecks
 
-The feature is currently only available as dynamic configuration provided through File. That's why we have to add file provider that points to a config map containing Traefik's extra configuration
+The feature is currently only available as dynamic configuration provided through File. That's why we have to add file provider that points to a config map containing Traefik's extra configuration.
 
 * Create configmap:
 
@@ -97,7 +96,7 @@ helm upgrade --install traefik -f values.yaml traefik/traefik -n traefik
 curl https://nested.waw.demo.traefiklabs.tech
 ```
 
-You should receive responses from both services whoamiv1 and whoamiv2 according to the weighets set in the dynamic configuration. 
+You should receive responses from both services `whoamiv1` and `whoamiv2` according to the weights set in the dynamic configuration. 
 
 * Scale down to 0 replicas on one of the service
  
