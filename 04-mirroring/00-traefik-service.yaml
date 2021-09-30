@@ -12,7 +12,7 @@ spec:
     namespace: app
     mirrors:
 
-      - name: whoamiv2 # logs
+      - name: whoamiv2 
         port: 80
         namespace: app
         percent: 50

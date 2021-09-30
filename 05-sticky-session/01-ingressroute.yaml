@@ -9,7 +9,7 @@ spec:
      - websecure
   routes:
     - kind: Rule
-      match: Host(`s.waw.demo.traefiklabs.tech`)
+      match: Host(`s.asd.demo.traefiklabs.tech`)
       services:
         - kind: TraefikService 
           name: whoami-sticky-session

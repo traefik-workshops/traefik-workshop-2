@@ -9,9 +9,9 @@ spec:
      - websecure
   routes:
     - kind: Rule
-      match: Host(`v.waw.demo.traefiklabs.tech`) && HeadersRegexp(`X-Canary-Header`, `knock-knock`)
+      match: Host(`v.asd.demo.traefiklabs.tech`) && HeadersRegexp(`X-Canary-Header`, `knock-knock`)
       services:
-        - kind: Service # is it better to use TraefikService?
+        - kind: Service 
           name: whoamiv2
           namespace: app
           port: 80
@@ -19,3 +19,5 @@ spec:
         - name: app-let-me-in@kubernetescrd
   tls:
     certResolver: le           
+
+# see the priority docs: https://doc.traefik.io/traefik/routing/routers/#priority

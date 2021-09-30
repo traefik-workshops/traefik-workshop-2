@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`v1.waw.demo.traefiklabs.tech`) 
+      match: Host(`v1.asd.demo.traefiklabs.tech`) 
       services:
         - kind: Service
           name: whoamiv1
@@ -29,7 +29,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`v2.waw.demo.traefiklabs.tech`) 
+      match: Host(`v2.asd.demo.traefiklabs.tech`) 
       services:
         - kind: Service
           name: whoamiv2

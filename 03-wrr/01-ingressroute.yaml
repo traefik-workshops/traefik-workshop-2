@@ -9,7 +9,7 @@ spec:
      - websecure
   routes:
      - kind: Rule
-       match: Host(`v.waw.demo.traefiklabs.tech`)
+       match: Host(`v.asd.demo.traefiklabs.tech`)
        services:
            - kind: TraefikService
              name: weighted-whoami

@@ -9,11 +9,11 @@ providers:
 
 additionalArguments:
   - "--certificatesresolvers.le-staging.acme.tlschallenge=true"
-  - "--certificatesresolvers.le-staging.acme.email=jakub.hajek@traefik.io"
+  - "--certificatesresolvers.le-staging.acme.email=<REPLACE_ME>"
   - "--certificatesresolvers.le-staging.acme.storage=/data/acme.json"
   - "--certificatesresolvers.le-staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
   - "--certificatesresolvers.le.acme.tlschallenge=true"
-  - "--certificatesresolvers.le.acme.email=jakub.hajek@traefik.io"
+  - "--certificatesresolvers.le.acme.email=<REPLACE_ME>"
   - "--certificatesresolvers.le.acme.storage=/data/acme.json"
 
 persistence:
