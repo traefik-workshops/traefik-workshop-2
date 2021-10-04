@@ -1,6 +1,8 @@
 # Advanced Load Balancing with Traefik 2.5
 ## Traefik Workshop 2
 
+The recording of this workshop is already available at Traefik's You Tube channel. Here is [the link](https://youtu.be/eUlAS-FdELg).
+
 Agenda:
 
 1. Deploying Traefik using the official Helm Chart.
